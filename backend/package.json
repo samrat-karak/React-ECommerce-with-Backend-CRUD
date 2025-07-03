@@ -1,0 +1,15 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "This is my Backend server created by samrat",
+  "main": "db.json",
+  "scripts": {
+    "start" : "npx json-server db.json --watch --port 5050",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Samrat Karak",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
+}
