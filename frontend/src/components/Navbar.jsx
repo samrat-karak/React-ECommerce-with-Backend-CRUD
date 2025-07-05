@@ -1,10 +1,16 @@
-import React, { Children } from 'react'
+import React, { Children, useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Avatar from '@mui/material/Avatar'
 import CartDrawer from './CartDrawer'
 
 const Navbar = () => {
+
+  const [menuToggle,setMenuToggle]=useState(false)
+
+  const toggleMenu=()=>{
+    setMenuToggle(!menuToggle)
+  }
 
    const categories=[
       {
@@ -91,11 +97,19 @@ const Navbar = () => {
             </button>
 
             {/* <Avatar sx={{bgcolor:'black'}}>U</Avatar> */}
-            <Avatar sx={{bgcolor:'black'}} {...stringAvatar("Smrat Karak")}/>
+            <div className='relative' onClick={toggleMenu}>
+              <Avatar sx={{bgcolor:'black'}} {...stringAvatar("Smrat Karak")}/>
 
-            <button className="bg-black py-2 px-6 rounded text-white cursor-pointer hover:bg-gray-200 hover:border hover:text-black" onClick={handelLogout}>
-              Logout
-            </button>
+              {menuToggle? <>
+              <div className='absolute min-w-40 p-2 right-0 bg-white shadow-lg rounded-lg top-12 z-50 border border-gray-200'>
+                <ul className='flex flex-col gap-2'>
+                  <li onClick={handelLogout} className='hover:bg-gray-100 px-2 py-1 cursor-pointer'>
+                    Logout
+                  </li>
+                </ul>
+              </div>
+              </>: null}
+            </div>
           </>
         ) : (
           <>

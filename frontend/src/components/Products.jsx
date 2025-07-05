@@ -170,7 +170,7 @@ const Products = () => {
 
   return (
     <div className='mt-[70px] flex'>
-        <aside className='min-h-screen w-[20%] p-3'>
+        <aside className='bg-white min-h-screen w-[20%] p-3'>
             <header className='p-5'>
                 <h1 className='text-2xl font-bold'>Filters</h1>
             </header>
@@ -212,15 +212,15 @@ const Products = () => {
         </aside>
 
         <main className='min-h-screen w-[80%] p-3'>
-        <header className='p-5 flex justify-between'>
+        <header className='p-5 flex justify-between  bg-white rounded-lg shadow'>
             <h1 className='text-2xl font-bold'>All Products</h1>
 
             <div className='flex items-center gap-4'>
                 <span>4 Products</span>
-                <select name='sort' id='sort' className='p-2 shadow-md rounded outline-0'>
-                    <option value="" disabled>--Sort--</option>
-                    <option value="">High to Low</option>
-                    <option value="">Low to High</option>
+                <select name='sort' id='sort' className='p-2 shadow-md rounded outline-0 bg-black text-white cursor-pointer min-w-[150px]'>
+                    <option value="" disabled selected  className="bg-gray-800 text-gray-300">--Sort--</option>
+                    <option value="high" className="bg-black text-white">High to Low</option>
+                    <option  value="low" className="bg-black text-white">Low to High</option>
                 </select>
 
             </div>
