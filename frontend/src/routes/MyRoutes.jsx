@@ -3,6 +3,7 @@ import RegisterPage from "../components/RegisterPage";
 import LoginPage from "../components/LoginPage";
 import Layout from "../components/Layout";
 import Home from '../components/Home';
+import Products from '../components/Products';
 
 let myRoutes = createBrowserRouter([
     {
@@ -18,6 +19,9 @@ let myRoutes = createBrowserRouter([
             },{
                 path:'/home',
                 element:<Home/>
+            },{
+                path:'/products',
+                element:<Products/>
             }
         ]
     }

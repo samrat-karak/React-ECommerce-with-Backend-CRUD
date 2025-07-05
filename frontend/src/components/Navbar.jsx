@@ -8,6 +8,16 @@ const Navbar = () => {
 
    const categories=[
       {
+        id:"home",
+        title:"Home",
+        path:"/home"
+      },
+      {
+        id:"products",
+        title:"Products",
+        path:"/products"
+      },
+      {
         id:"men",
         title:"Men",
       },
@@ -62,9 +72,11 @@ const Navbar = () => {
           <>
             <section className="flex gap-2">
               {categories.map((category) => ( // Implicit return using ()    or explicit return ---->   { return (  )}
-                <div key={category.id} className="p-4 font-semibold">
+                <Link to={category.path? category.path: '/home'}>
+                  <div key={category.id} className="p-4 font-semibold">
                   {category.title}
                 </div>
+                </Link>
               ))}
             </section>
           </>
