@@ -88,7 +88,7 @@ const RegisterPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-        <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 mt-17">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 mt-17">
         <h1 className="font-bold text-4xl text-center text-black mb-3">Register</h1>
         <form>
             <div className="flex flex-col gap-1 mb-3">
@@ -108,7 +108,7 @@ const RegisterPage = () => {
                 <input className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black transition" type="text" name='confirmpassword' id='confirmpassword' value={formData.confirmpassword} onChange={handleChange}   placeholder="Confirm your password" autoComplete="off" />
             </div>
             <div>
-                <button onClick={register} className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg shadow hover:bg-blue-700 transition">Register</button>
+                <button onClick={register} className="w-full bg-black text-white font-semibold py-2 rounded-lg shadow hover:bg-blue-800 transition">Register</button>
             </div>
         </form>
         </div>
