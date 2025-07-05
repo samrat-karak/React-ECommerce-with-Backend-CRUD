@@ -1,5 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { Children } from 'react'
+import { Link,useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import Avatar from '@mui/material/Avatar'
+import CartDrawer from './CartDrawer'
 
 const Navbar = () => {
 
@@ -33,14 +36,29 @@ const Navbar = () => {
 
   let accesstoken=localStorage.getItem('accesstoken')
 
+    let navigate=useNavigate()
+
+  const handelLogout=()=>{
+    localStorage.removeItem('accesstoken')
+    toast.success("logged out")
+    navigate("/login")
+  }
+
+  function stringAvatar(name) {
+    return{
+      children:`${name.split(" ")[0][0]}${name.split(" ")[1][0]}`
+    }
+  }
+
+
+
   return (
     <nav className="absolute top-0 h-[70px] w-full bg-white flex items-center justify-between px-6 shadow z-50">
       <div className="font-extrabold text-3xl text-gray-600  drop-shadow-lg select-none">
         MyApp
       </div>
 
-      <aside className="flex gap-4 font-semibold">
-        {accesstoken ? (
+      {accesstoken ?(
           <>
             <section className="flex gap-2">
               {categories.map((category) => ( // Implicit return using ()    or explicit return ---->   { return (  )}
@@ -49,8 +67,21 @@ const Navbar = () => {
                 </div>
               ))}
             </section>
+          </>
+          ): null}
 
-            <button className="bg-black py-2 px-6 rounded text-white cursor-pointer hover:bg-gray-200 hover:border hover:text-black">
+        <aside className="flex gap-4 font-semibold">
+        
+        {accesstoken ? (
+          <>
+            <button>
+              <CartDrawer/>
+            </button>
+
+            {/* <Avatar sx={{bgcolor:'black'}}>U</Avatar> */}
+            <Avatar sx={{bgcolor:'black'}} {...stringAvatar("Smrat Karak")}/>
+
+            <button className="bg-black py-2 px-6 rounded text-white cursor-pointer hover:bg-gray-200 hover:border hover:text-black" onClick={handelLogout}>
               Logout
             </button>
           </>

@@ -1,8 +1,16 @@
 import React from 'react'
-import { IoShirtOutline } from "react-icons/io5";
+import { PiShirtFoldedLight } from "react-icons/pi";
 import { GiRunningShoe } from "react-icons/gi";
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
+import { SiAdidas } from "react-icons/si";
+import { SiPuma } from "react-icons/si";
+import { SiZara } from "react-icons/si";
+import { SiHandm } from "react-icons/si";
+import { SiNike } from "react-icons/si";
+import { FaTools } from "react-icons/fa";
+import { GiLargeDress } from "react-icons/gi";
+import { FaChildReaching } from "react-icons/fa6";
 
 
 const Home = () => {
@@ -11,17 +19,17 @@ const Home = () => {
     {
       id:"men",
       title:"Men",
-      icon:<IoShirtOutline />
+      icon:<PiShirtFoldedLight />
     },
     {
       id:"women",
       title:"Women",
-      icon:<IoShirtOutline />
+      icon:<GiLargeDress />
     },
     {
       id:"kids",
       title:"Kids",
-      icon:<IoShirtOutline />
+      icon:<FaChildReaching />
     },
     {
       id:"footware",
@@ -31,7 +39,7 @@ const Home = () => {
     {
       id:"accessories",
       title:"Accessories",
-      icon:<IoShirtOutline />
+      icon:<FaTools />
     }
   ]
 
@@ -39,33 +47,33 @@ const Home = () => {
     {
       id:"nike",
       brandName:"Nike",
-      icon:<IoShirtOutline />
+      icon: <SiNike />
     },
     {
       id:"h&m",
       brandName:"H&M",
-      icon:<IoShirtOutline />
+      icon:<SiHandm />
     },
     {
       id:"adidas",
       brandName:"Adidas",
-      icon:<IoShirtOutline />
+      icon:<SiAdidas />
     },
     {
       id:"zara",
       brandName:"Zara",
-      icon:<IoShirtOutline />
+      icon:<SiZara />
     },
     {
       id:"puma",
       brandName:"Puma",
-      icon:<IoShirtOutline />
+      icon: <SiPuma/>
     }
   ]
 
     const sampleProducts = [
     {
-      image: "https://example.com/products/shirt.jpg",
+      image: "/assets/shirt.png",
       title: "cotton casual shirt",
       description: "comfortable and breathable cotton casual shirt for daily wear",
       category: "clothing",
@@ -76,7 +84,7 @@ const Home = () => {
       averageReview: 4.2,
     },
     {
-      image: "https://example.com/products/laptop.jpg",
+      image: "/assets/laptop.png",
       title: "hp pavilion laptop",
       description: "powerful hp laptop with i5 processor and 8GB RAM for multitasking",
       category: "electronics",
@@ -87,7 +95,7 @@ const Home = () => {
       averageReview: 4.5,
     },
     {
-      image: "https://example.com/products/smartphone.jpg",
+      image: "/assets/samsungS21.png",
       title: "samsung galaxy s21",
       description: "android smartphone with dynamic AMOLED display and high-end camera",
       category: "mobiles",
@@ -98,7 +106,7 @@ const Home = () => {
       averageReview: 4.6,
     },
     {
-      image: "https://example.com/products/shoes.jpg",
+      image: "/assets/nikeShoes.png",
       title: "nike running shoes",
       description: "lightweight running shoes for men with extra grip and durability",
       category: "footwear",
@@ -109,7 +117,7 @@ const Home = () => {
       averageReview: 4.3,
     },
     {
-      image: "https://example.com/products/watch.jpg",
+      image: "/assets/fossilWatch.png",
       title: "fossil analog watch",
       description: "premium analog wristwatch with leather strap and metal case",
       category: "accessories",
@@ -120,7 +128,7 @@ const Home = () => {
       averageReview: 4.0,
     },
     {
-      image: "https://example.com/products/mixer.jpg",
+      image: "/assets/philipsMixer.png",
       title: "philips mixer grinder",
       description: "750-watt powerful mixer grinder for daily kitchen use",
       category: "home appliances",
@@ -131,7 +139,7 @@ const Home = () => {
       averageReview: 4.1,
     },
     {
-      image: "https://example.com/products/book.jpg",
+      image: "/assets/atomicHabitsBook.png",
       title: "atomic habits book",
       description: "bestseller book on building habits for long-term success",
       category: "books",
@@ -142,7 +150,7 @@ const Home = () => {
       averageReview: 4.8,
     },
     {
-      image: "https://example.com/products/table.jpg",
+      image: "/assets/woodenTable.jpg",
       title: "wooden study table",
       description: "compact wooden study table with drawer and open shelf",
       category: "furniture",
@@ -153,7 +161,7 @@ const Home = () => {
       averageReview: 3.9,
     },
     {
-      image: "https://example.com/products/earbuds.jpg",
+      image: "/assets/boatAirpod.png",
       title: "boat airdopes 441",
       description: "wireless bluetooth earbuds with immersive sound and long battery",
       category: "audio",
@@ -164,7 +172,7 @@ const Home = () => {
       averageReview: 4.4,
     },
     {
-      image: "https://example.com/products/helmet.jpg",
+      image: "/assets/helmet.png",
       title: "vega full face helmet",
       description: "strong and stylish full face helmet for two-wheeler riders",
       category: "safety",
@@ -196,10 +204,10 @@ const Home = () => {
         </div>
     </div>,
     <div className="item h-[70vh]" data-value="3">
-      <img src="/assets/image2.jpg" alt="" className='h-full w-full object-center object-cover'/>
+      <img src="/assets/image2.jpg" alt="" className='h-150vh w-full object-center object-fit'/>
 
         <div className='absolute top-[15vh] left-20'>
-          <h1 className='text-5xl font-light mb-4'>Lorem ipsum dolor sit amet.</h1>
+          <h1 className='text-5xl font-light mb-4 text-white'>Lorem ipsum dolor sit amet.</h1>
           <h2 className='text-4xl font-bold mb-10'>Lorem ipsum dolor sit.</h2>
           <button className='bg-black text-white px-4 py-2 rounded'>View Products</button>
         </div>
@@ -282,7 +290,7 @@ const Home = () => {
             return(
               <div key={brand.id} className='p-3 rounded bg-white shadow-xl border border-gray-200'>
                 <figure className='text-6xl'>{brand.icon}</figure>
-                <h3 className='font-bold text-center pt-2'>{brand.title}</h3>
+                <h3 className='font-bold text-center pt-2'>{brand.brandName}</h3>
               </div>
             )
           })}
@@ -299,7 +307,7 @@ const Home = () => {
               <section key={idx} className=" p-4">
                 <div className="shadow-lg rounded-lg overflow-hidden w-64">
                   <img
-                    src={"https://www.shutterstock.com/image-vector/no-image-available-picture-coming-600nw-2057829641.jpg"}
+                    src={product.image}
                     alt=""
                     className=" h-64 w-full object-cover object-top block mx-auto"
                   />
