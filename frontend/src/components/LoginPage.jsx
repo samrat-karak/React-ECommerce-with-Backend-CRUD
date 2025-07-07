@@ -12,8 +12,8 @@ const LoginPage = () => {
 
     const navigate=useNavigate()
 
-    let allUsers=useApi('/users')
-    console.log(allUsers);
+    // let allUsers=useApi('/users')
+    // console.log(allUsers);
 
     const handleChange=(e)=>{
         let {name,value}=e.target
@@ -23,32 +23,37 @@ const LoginPage = () => {
         setFormData({...formData, [name]:value})
     }
 
-    const Login=(e)=>{
-        e.preventDefault()
-        console.log("from login");
-        console.log(formData);
+    // const login=(e)=>{
+    //     e.preventDefault()
+    //     console.log("from login");
+    //     console.log(formData);
 
-        let authUser=allUsers.find((singleUser)=>{
-            return singleUser.email===formData.email && singleUser.password===formData.password 
-        })
+    //     let authUser=allUsers.find((singleUser)=>{
+    //         return singleUser.email===formData.email && singleUser.password===formData.password 
+    //     })
 
-        console.log(authUser);
+    //     console.log(authUser);
 
-        if (authUser) {
+    //     if (authUser) {
 
-            // toast Message
-            toast.success("Login successful")
+    //         // toast Message
+    //         toast.success("Login successful")
 
-            // navigate to Home.jsx
-            navigate('/home')
+    //         // navigate to Home.jsx
+    //         navigate('/home')
 
-            // store token in local storage
-            localStorage.setItem("accesstoken",Date.now())
-        }
-        else{
-            toast.error("Invalid Credentials")
-        }
+    //         // store token in local storage
+    //         localStorage.setItem("accesstoken",Date.now())
+    //     }
+    //     else{
+    //         toast.error("Invalid Credentials")
+    //     }
          
+    // }
+    const login=async (e)=>{
+        e.preventDefault()
+        console.log(formData);
+        
     }
 
   return (
@@ -65,7 +70,7 @@ const LoginPage = () => {
                 <input className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black transition" type="text" name='password' id='password' value={formData.password} onChange={handleChange}  placeholder="Enter your password" autoComplete="off"/>
             </div>
             <div>
-                <button onClick={Login} className="w-full bg-black text-white font-semibold py-2 rounded-lg shadow  transition">Login</button>
+                <button onClick={login} className="w-full bg-black text-white font-semibold py-2 rounded-lg shadow  transition">Login</button>
             </div>
         </form>
         </div>
