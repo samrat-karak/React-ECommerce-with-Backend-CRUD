@@ -1,14 +1,17 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useApi } from "../utilities/utilities"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
-
+import { AxiosInstance } from "../routes/AxiosInstance"
+import { GlobalAuthContext } from "../authContext/AuthContext"
 
 const LoginPage = () => {
     const[formData, setFormData]=useState({
         email:"",
         password:"",
     })
+
+    const {setloggedInUser}=useContext(GlobalAuthContext)
 
     const navigate=useNavigate()
 
@@ -53,6 +56,24 @@ const LoginPage = () => {
     const login=async (e)=>{
         e.preventDefault()
         console.log(formData);
+
+        try {
+            let response=await AxiosInstance.post("/user/login",{
+                email:formData.email,
+                password:formData.password,
+            })
+            console.log(response);
+            if (response.data.success) {
+                setloggedInUser(true)
+                toast.success(response.data.message)
+                navigate("/home")
+            }
+            
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response.data.message)
+            
+        }
         
     }
 

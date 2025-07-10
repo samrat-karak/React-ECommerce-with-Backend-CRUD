@@ -58,31 +58,55 @@ const RegisterPage = () => {
 
     const register=  async (e)=>{
         e.preventDefault()
-        // if (!validateInputs(formData)) return;
-        // console.log("from Submitted");
-        console.log(formData);
+
         try {
-            let response  =  await AxiosInstance.post('/users',formData)
-            console.log(response);
-
-            toast.success("SignUp Scucessfully")
-
-            // To Navigate to Login page
-            navigate('/login')
-
-            // to clear input filed
-            setFormData({
-            username:"",
-            email:"",
-            password:"",
-            // confirmpassword:""
+            let response=await AxiosInstance.post("/user/register",{
+                userName:formData.username,
+                email:formData.email,
+                password:formData.password
             })
+            console.log(response);
+            if (response.data.success) {
+                toast.success(response.data.message)
+                navigate("/login")
+            }
             
         } catch (error) {
-            toast.error("Unable To register !!")
-            console.log(error);
-            
+            console.log("Error while Registering");
+            // console.log(error);
+            toast.error(error.response.data.message)
         }
+
+
+
+
+
+
+        // if (!validateInputs(formData)) return;
+        // console.log("from Submitted");
+        // console.log(formData);
+        // try {
+        //     let response  =  await AxiosInstance.post('/users',formData)
+        //     console.log(response);
+
+        //     toast.success("SignUp Scucessfully")
+
+        //     // To Navigate to Login page
+        //     navigate('/login')
+
+        //     // to clear input filed
+        //     setFormData({
+        //     username:"",
+        //     email:"",
+        //     password:"",
+        //     // confirmpassword:""
+        //     })
+            
+        // } catch (error) {
+        //     toast.error("Unable To register !!")
+        //     console.log(error);
+            
+        // }
          
     }
 

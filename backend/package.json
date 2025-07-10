@@ -7,7 +7,7 @@
     "dev": "nodemon server.js",
     "start": "node server.js"
   },
-  "author": "",
+  "author": "Samrat Karak",
   "license": "ISC",
   "keywords": [],
   "dependencies": {

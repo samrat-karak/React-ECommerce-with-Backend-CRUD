@@ -1,12 +1,17 @@
-import React, { Children, useState } from 'react'
+import React, { Children, useContext, useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Avatar from '@mui/material/Avatar'
 import CartDrawer from './CartDrawer'
+import { GlobalAuthContext } from '../authContext/AuthContext'
 
 const Navbar = () => {
 
   const [menuToggle,setMenuToggle]=useState(false)
+
+  const {loggedInUser}=useContext(GlobalAuthContext)
+  console.log(loggedInUser);
+  
 
   const toggleMenu=()=>{
     setMenuToggle(!menuToggle)
