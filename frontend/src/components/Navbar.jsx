@@ -4,13 +4,16 @@ import { toast } from 'react-toastify'
 import Avatar from '@mui/material/Avatar'
 import CartDrawer from './CartDrawer'
 import { GlobalAuthContext } from '../authContext/AuthContext'
+import { AxiosInstance } from '../routes/AxiosInstance'
 
 const Navbar = () => {
 
   const [menuToggle,setMenuToggle]=useState(false)
 
-  const {loggedInUser}=useContext(GlobalAuthContext)
+  const {loggedInUser,setloggedInUser,authUser}=useContext(GlobalAuthContext)
   console.log(loggedInUser);
+  
+  console.log(authUser);
   
 
   const toggleMenu=()=>{
@@ -55,23 +58,43 @@ const Navbar = () => {
     ]
 
 
-  let accesstoken=localStorage.getItem('accesstoken')
+  // let accesstoken=localStorage.getItem('accesstoken')
 
     let navigate=useNavigate()
 
-  const handelLogout=()=>{
-    localStorage.removeItem('accesstoken')
-    toast.success("logged out")
-    navigate("/login")
-  }
+  const handelLogout=  async ()=>{
+    // localStorage.removeItem('accesstoken')
+    try {
+      
+      
+    let res=await AxiosInstance.post("/user/logout")
 
-  function stringAvatar(name) {
-    return{
-      children:`${name.split(" ")[0][0]}${name.split(" ")[1][0]}`
+    console.log(res);
+    if (res.data.success) {
+    toast.success(res.data)
+    setloggedInUser(false)
+    navigate("/login")
+    }
+
+    } catch (error) {
+      
+      console.log(error);
+      toast.error("logout failed")
+
     }
   }
 
-
+  function stringAvatar(name) {
+    let word=name.split(" ")
+      if (word.length >= 2) {
+      return{
+        children:`${name.split(" ")[0][0]}${name.split(" ")[1][0]}`
+        }
+      }
+    return {
+        children: `${name.split(" ")[0][0]}`
+    }
+  }
 
   return (
     <nav className="absolute top-0 h-[70px] w-full bg-white flex items-center justify-between px-6 shadow z-50">
@@ -79,12 +102,12 @@ const Navbar = () => {
         MyApp
       </div>
 
-      {accesstoken ?(
+      {loggedInUser ?(
           <>
             <section className="flex gap-2">
               {categories.map((category) => ( // Implicit return using ()    or explicit return ---->   { return (  )}
-                <Link to={category.path? category.path: '/home'}>
-                  <div key={category.id} className="p-4 font-semibold">
+                <Link key={category.id} to={category.path? category.path: '/home'}>
+                  <div className="p-4 font-semibold">
                   {category.title}
                 </div>
                 </Link>
@@ -95,15 +118,15 @@ const Navbar = () => {
 
         <aside className="flex gap-4 font-semibold">
         
-        {accesstoken ? (
+        {loggedInUser ? (
           <>
-            <button>
+            <div>
               <CartDrawer/>
-            </button>
+            </div>
 
             {/* <Avatar sx={{bgcolor:'black'}}>U</Avatar> */}
             <div className='relative' onClick={toggleMenu}>
-              <Avatar sx={{bgcolor:'black'}} {...stringAvatar("Smrat Karak")}/>
+              <Avatar sx={{bgcolor:'black'}} className='uppercase' {...stringAvatar(authUser.userName)}/>
 
               {menuToggle? <>
               <div className='absolute min-w-40 p-2 right-0 bg-white shadow-lg rounded-lg top-12 z-50 border border-gray-200'>

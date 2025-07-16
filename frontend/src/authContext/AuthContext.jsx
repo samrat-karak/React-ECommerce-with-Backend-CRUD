@@ -7,6 +7,7 @@ export const GlobalAuthContext=createContext()
 const AuthContext = ({children}) => {
 
     const[loggedInUser,setloggedInUser]=useState(null);
+    const[authUser,setAuthUser]=useState({})
     const[loading,setLoading]=useState(null);
 
     const checkLoggedInUser= async () => {
@@ -14,7 +15,7 @@ const AuthContext = ({children}) => {
             // APi Call
             let response=await AxiosInstance.get("/user/me")
             console.log(response);
-            
+            setAuthUser(response.data.data)
             // if User  is logged in , return true
             // setLoggedInUser to true
             setloggedInUser(response.data.success)
@@ -42,6 +43,7 @@ const AuthContext = ({children}) => {
         loading,
         setLoading,
         checkLoggedInUser,
+        authUser
       }}
     >
         {children}

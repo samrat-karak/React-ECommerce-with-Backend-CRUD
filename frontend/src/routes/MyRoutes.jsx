@@ -4,6 +4,7 @@ import LoginPage from "../components/LoginPage";
 import Layout from "../components/Layout";
 import Home from '../components/Home';
 import Products from '../components/Products';
+import UserPrivate from './UserPrivate';
 
 let myRoutes = createBrowserRouter([
     {
@@ -18,13 +19,21 @@ let myRoutes = createBrowserRouter([
             element:<LoginPage/>
             },{
                 path:'/home',
-                element:<Home/>
+                element:<UserPrivate>
+                    <Home/>
+                </UserPrivate>
             },{
                 path:'/products',
-                element:<Products/>
+                element:<UserPrivate>
+                    <Products/>
+                </UserPrivate>
             }
         ]
-    }
+    },
+    {
+        path:"*",
+        element:<h1>Not Found</h1>
+        }
 ]
 )
 

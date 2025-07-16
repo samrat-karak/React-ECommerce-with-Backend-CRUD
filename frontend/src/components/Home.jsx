@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { PiShirtFoldedLight } from "react-icons/pi";
 import { GiRunningShoe } from "react-icons/gi";
 import AliceCarousel from 'react-alice-carousel';
@@ -11,9 +11,13 @@ import { SiNike } from "react-icons/si";
 import { FaTools } from "react-icons/fa";
 import { GiLargeDress } from "react-icons/gi";
 import { FaChildReaching } from "react-icons/fa6";
+import ProductCard from './ProductCard';
+import { AllProductsContext } from '../productContext/ProductsContext';
 
 
 const Home = () => {
+
+  let{allProducts}=useContext(AllProductsContext)
 
   const categories=[
     {
@@ -302,29 +306,9 @@ const Home = () => {
         </header>
 
         <article className="grid grid-cols-4 justify-items-center">
-          {sampleProducts.map((product, idx) => {
+          {allProducts.map((product, idx) => {
             return (
-              <section key={idx} className=" p-4">
-                <div className="shadow-lg rounded-lg overflow-hidden w-64">
-                  <img
-                    src={product.image}
-                    alt=""
-                    className=" h-64 w-full object-cover object-top block mx-auto"
-                  />
-                  <div className="p-4">
-                    <h1 className="capitalize font-extrabold text-xl">{product.title}</h1>
-                    <p className="flex justify-between text-sm capitalize text-gray-600 font-semibold">
-                      <span className="">{product.category}</span>
-                      <span>{product.brand}</span>
-                    </p>
-                    <h3 className="flex justify-between font-semibold">
-                      <del>Rs.{product.price}</del>
-                      <span>Rs.{product.salePrice}</span>
-                    </h3>
-                    <button className="bg-black text-white w-full rounded py-1 mt-3 cursor-pointer">Add to cart</button>
-                  </div>
-                </div>
-              </section>
+              <ProductCard key={idx} product={product} />
             );
           })}
         </article>

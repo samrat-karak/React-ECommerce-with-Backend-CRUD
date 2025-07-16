@@ -7,7 +7,7 @@ const ErrorHandler = require("../../utils/ErrorHandler.utils");
 // ─── Add To Cart ───────────────────────────────────────────────────────────────
 const addToCart = expressAsyncHandler(async (req, res, next) => {
   const userId = req.user._id;
-  const { productId, quantity } = req.body;
+  const { productId } = req.body;
 
   const product = await productCollection.findById(productId);
   if (!product) return next(new ErrorHandler("Product not found", 404));
@@ -17,15 +17,19 @@ const addToCart = expressAsyncHandler(async (req, res, next) => {
     cart = await cartCollection.create({ userId, items: [] });
   }
 
-  const index = cart.items.findIndex((item) => item.productId.toString() === productId);
+  const index = cart.items.findIndex(
+    (item) => item.productId.toString() === productId
+  );
   if (index === -1) {
-    cart.items.push({ productId, quantity });
+    cart.items.push({ productId, quantity: 1 });
   } else {
-    cart.items[index].quantity += quantity;
+    cart.items[index].quantity += 1;
   }
 
   await cart.save();
-  new ApiResponse(true, "Product added to cart successfully", cart, 200).send(res);
+  new ApiResponse(true, "Product added to cart successfully", cart, 200).send(
+    res
+  );
 });
 
 // ─── Fetch Cart Items ──────────────────────────────────────────────────────────
@@ -61,7 +65,9 @@ const fetchCartItems = expressAsyncHandler(async (req, res, next) => {
 
   new ApiResponse(
     true,
-    populateCartItems.length === 0 ? "Cart is empty" : "Cart items fetched successfully",
+    populateCartItems.length === 0
+      ? "Cart is empty"
+      : "Cart items fetched successfully",
     cartItems,
     200
   ).send(res);
@@ -70,17 +76,26 @@ const fetchCartItems = expressAsyncHandler(async (req, res, next) => {
 // ─── Update Cart Items ─────────────────────────────────────────────────────────
 const updateCartItems = expressAsyncHandler(async (req, res, next) => {
   const userId = req.user._id;
-  const { productId, quantity } = req.body;
+  const { productId } = req.body;
 
   const cart = await cartCollection.findOne({ userId });
   if (!cart) return next(new ErrorHandler("Cart not found", 404));
 
-  const index = cart.items.findIndex((item) => item.productId.toString() === productId);
+  const index = cart.items.findIndex(
+    (item) => item.productId.toString() === productId.toString()
+  );
   if (index === -1) {
     return next(new ErrorHandler("Product not found in cart", 404));
   }
 
-  cart.items[index].quantity = quantity;
+  // Decrease quantity by 1
+  cart.items[index].quantity -= 1;
+
+  // Optional: remove item if quantity is now 0 or less
+  if (cart.items[index].quantity <= 0) {
+    cart.items.splice(index, 1);
+  }
+
   await cart.save();
 
   await cart.populate({
@@ -111,6 +126,7 @@ const updateCartItems = expressAsyncHandler(async (req, res, next) => {
 
   new ApiResponse(true, "Cart updated successfully", cartItems, 200).send(res);
 });
+
 
 // ─── Delete Cart Item ──────────────────────────────────────────────────────────
 const deleteCartItem = expressAsyncHandler(async (req, res, next) => {
@@ -156,7 +172,9 @@ const deleteCartItem = expressAsyncHandler(async (req, res, next) => {
   };
 
   const message =
-    populateCartItems.length === 0 ? "Cart is now empty" : "Product removed from cart successfully";
+    populateCartItems.length === 0
+      ? "Cart is now empty"
+      : "Product removed from cart successfully";
 
   new ApiResponse(true, message, cartItems, 200).send(res);
 });
